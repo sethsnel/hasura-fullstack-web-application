@@ -1,0 +1,24 @@
+table:
+  name: Movies
+  schema: public
+array_relationships:
+  - name: Ratings
+    using:
+      manual_configuration:
+        column_mapping:
+          Id: MovieId
+        insertion_order: null
+        remote_table:
+          name: Ratings
+          schema: public
+select_permissions:
+  - role: user
+    permission:
+      columns:
+        - Id
+        - Description
+        - PosterUrl
+        - Title
+      filter: {}
+      allow_aggregations: true
+    comment: ""

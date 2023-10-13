@@ -1,0 +1,58 @@
+api-version: 2021-03-01
+location: westeurope
+name: hasura-graphql-engine
+properties:
+  containers:
+    - name: hasura-graphql-engine
+      properties:
+        image: hasura/graphql-engine:latest
+        ports:
+          - port: 8080
+            protocol: TCP
+        resources:
+          requests:
+            cpu: 0.75
+            memoryInGB: 1
+        environmentVariables:
+          - name: HASURA_GRAPHQL_SERVER_PORT
+            value: '8080'
+          - name: HASURA_GRAPHQL_ENABLE_CONSOLE
+            value: true
+          - name: HASURA_GRAPHQL_ADMIN_SECRET
+            secureValue: SECRET
+          - name: HASURA_GRAPHQL_JWT_SECRET
+            value: '{}'
+          - name: HASURA_GRAPHQL_DATABASE_URL
+            secureValue: 'SECRET'
+    - name: caddy
+      properties:
+        image: caddy:latest
+        command:
+          [
+            'caddy',
+            'reverse-proxy',
+            '--from',
+            'project-name.westeurope.azurecontainer.io',
+            '--to',
+            'localhost:8080',
+          ]
+        ports:
+          - port: 80
+            protocol: TCP
+          - port: 443
+            protocol: TCP
+        resources:
+          requests:
+            cpu: 0.25
+            memoryInGB: 0.5
+  ipAddress:
+    ports:
+      - port: 80
+        protocol: TCP
+      - port: 443
+        protocol: TCP
+    type: Public
+    dnsNameLabel: dns-name-label
+  osType: Linux
+tags: null
+type: Microsoft.ContainerInstance/containerGroups

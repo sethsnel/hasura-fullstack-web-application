@@ -1,0 +1,7 @@
+mutation Rating($Rating: Int = 10, $ProfileId: uuid = "", $MovieId: Int) {
+  insert_Ratings(objects: {ProfileId: $ProfileId, Rating: $Rating, MovieId: $MovieId}, on_conflict: {constraint: Ratings_pkey, update_columns: Rating}) {
+    returning {
+      Rating
+    }
+  }
+}

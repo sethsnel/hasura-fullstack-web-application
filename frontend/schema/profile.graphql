@@ -1,0 +1,11 @@
+mutation UpsertProfile($Id: uuid, $Name: String, $Email: String) {
+  insert_Profiles_one(object: {Id: $Id, Name: $Name, Email: $Email}, on_conflict: {update_columns: Name, constraint: Profiles_pkey}) {
+    Id
+  }
+}
+
+query Profile($Id: uuid) {
+  Profiles(where: {Id: {_eq: $Id}}) {
+    Id
+  }
+}

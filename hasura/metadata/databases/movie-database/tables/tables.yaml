@@ -1,0 +1,3 @@
+- "!include public_Movies.yaml"
+- "!include public_Profiles.yaml"
+- "!include public_Ratings.yaml"

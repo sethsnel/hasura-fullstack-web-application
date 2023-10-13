@@ -1,0 +1,43 @@
+table:
+  name: Ratings
+  schema: public
+object_relationships:
+  - name: Movie
+    using:
+      foreign_key_constraint_on: MovieId
+  - name: Profile
+    using:
+      foreign_key_constraint_on: ProfileId
+insert_permissions:
+  - role: user
+    permission:
+      check:
+        ProfileId:
+          _eq: X-Hasura-User-Id
+      columns:
+        - MovieId
+        - Rating
+        - ProfileId
+    comment: ""
+select_permissions:
+  - role: user
+    permission:
+      columns:
+        - MovieId
+        - Rating
+        - ProfileId
+      filter: {}
+      allow_aggregations: true
+    comment: ""
+update_permissions:
+  - role: user
+    permission:
+      columns:
+        - MovieId
+        - Rating
+        - ProfileId
+      filter:
+        ProfileId:
+          _eq: X-Hasura-User-Id
+      check: null
+    comment: ""

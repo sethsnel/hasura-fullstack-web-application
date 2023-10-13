@@ -1,0 +1,7 @@
+version: 3
+endpoint: <your-hasura-endpoint> e.g. https://{project-name}.hasura.app
+admin_secret: <your-hasura-admin-secret>
+metadata_directory: metadata
+actions:
+  kind: synchronous
+  handler_webhook_baseurl: https://verloskundige-spiekt.hasura.app

@@ -1,0 +1,46 @@
+query ListMovies($limit: Int = 20, $titleFilter: String = "%%") {
+  Movies(limit: $limit, where: {Title: {_ilike: $titleFilter}}) {
+    Title
+    Id
+    PosterUrl
+    Description
+    Ratings_aggregate {
+      aggregate {
+        avg {
+          Rating
+        }
+      }
+    }
+  }
+}
+
+query ListMovieTitles($limit: Int = 8, $titleFilter: String = "%%") {
+  Movies(limit: $limit, where: {Title: {_ilike: $titleFilter}, }) {
+    Title
+  }
+}
+
+query Movie($movieId: Int) {
+  Movies(where: {Id: {_eq: $movieId}}) {
+    PosterUrl
+    Title
+    Description
+    Ratings_aggregate {
+      aggregate {
+        avg {
+          Rating
+        }
+      }
+    }
+  }
+}
+
+subscription MovieRatings($movieId: Int) {
+  Ratings(where: {MovieId: {_eq: $movieId}}) {
+    Rating
+    Profile {
+      Id
+      Name
+    }
+  }
+}

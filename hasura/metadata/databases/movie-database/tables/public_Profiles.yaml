@@ -1,0 +1,45 @@
+table:
+  name: Profiles
+  schema: public
+array_relationships:
+  - name: Ratings
+    using:
+      manual_configuration:
+        column_mapping:
+          Id: ProfileId
+        insertion_order: null
+        remote_table:
+          name: Ratings
+          schema: public
+insert_permissions:
+  - role: user
+    permission:
+      check:
+        Id:
+          _eq: X-Hasura-User-Id
+      columns:
+        - Email
+        - Name
+        - Id
+    comment: ""
+select_permissions:
+  - role: user
+    permission:
+      columns:
+        - Email
+        - Name
+        - Id
+      filter: {}
+    comment: ""
+update_permissions:
+  - role: user
+    permission:
+      columns:
+        - Email
+        - Name
+        - Id
+      filter:
+        Id:
+          _eq: X-Hasura-User-Id
+      check: null
+    comment: ""
