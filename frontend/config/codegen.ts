@@ -1,16 +1,13 @@
 import { CodegenConfig } from '@graphql-codegen/cli'
 
 const config: CodegenConfig = {
-  "schema": [
+  schema: [
     {
       "https://movie-database.hasura.app/v1/graphql": {
         "headers": {
           "x-hasura-role": "admin",
           "x-hasura-admin-secret": "<admin-secret>"
         }
-        // headers: {
-        //   Authorization: 'Bearer ' + process.env.AUTH_TOKEN,
-        // }
       }
     }
   ],
