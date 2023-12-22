@@ -11,8 +11,8 @@ const config = {
   auth: {
     authority: process.env.NEXT_PUBLIC_AD_AUTHORITY ?? "",
     clientId: process.env.NEXT_PUBLIC_AD_CLIENTID ?? "",
-    knownAuthorities: ['tutorialmoviedb.b2clogin.com'],
-    redirectUri: "http://localhost:3000",
+    knownAuthorities: [process.env.NEXT_PUBLIC_AD_AUTHORITY ?? ""],
+    redirectUri: process.env.NEXT_PUBLIC_APP_URL ?? "",
   },
   cache: {
     cacheLocation: "localStorage",
@@ -47,19 +47,12 @@ const config = {
 
 // Authentication Parameters
 export const loginParameters: RedirectRequest = {
-  scopes: [
-    "openid",
-    `https://tutorialmoviedb.onmicrosoft.com/49bfcbf1-5f35-4cbe-9153-83d869ead4de/api.user`,
-    //'profile',
-    //'user.read',
-    // 'mail.read',
-    // 'api://635f83f9-9959-4f08-8f83-20e900a54be5/Api.Access'
-  ],
+  scopes: ["openid"]
 }
 
 export const accessTokenParameters: RedirectRequest = {
   authority: process.env.NEXT_PUBLIC_AD_AUTHORITY,
-  scopes: ["offline_access", `https://tutorialmoviedb.onmicrosoft.com/49bfcbf1-5f35-4cbe-9153-83d869ead4de/api.user`],
+  scopes: ["offline_access"]
 }
 
 export const acquireAccessToken = async () => {
@@ -81,7 +74,6 @@ export const acquireAccessToken = async () => {
   await msalInstance.initialize()
 
   const authResult = await msalInstance.acquireTokenSilent(request)
-  console.info(authResult.accessToken)
 
   return authResult.idToken
 }
@@ -94,10 +86,6 @@ if (accounts.length > 0) {
 }
 
 msalInstance.addEventCallback((event) => {
-  // if (event.eventType === EventType.LOGIN_FAILURE) {
-  //     console.dir(event)
-  // }
-
   if (event.eventType === EventType.LOGIN_SUCCESS && event.payload) {
     const payload = event.payload as AuthenticationResult
     const account = payload.account
@@ -105,9 +93,3 @@ msalInstance.addEventCallback((event) => {
     msalInstance.setActiveAccount(account)
   }
 })
-
-//console.info(msalInstance.getActiveAccount())
-
-if (msalInstance.getActiveAccount()) {
-  //acquireAccessToken()
-}
