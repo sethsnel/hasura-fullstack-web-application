@@ -1,5 +1,7 @@
 import Head from "next/head"
 import { ReactNode } from "react"
+import { AuthenticatedTemplate } from "@azure/msal-react"
+
 import { msalInstance } from "../core/authProvider"
 
 import styles from "../styles/Home.module.css"
@@ -23,13 +25,15 @@ const Layout = ({ children }: LayoutProps) => {
       <main className={styles.main}>{children}</main>
 
       <footer className={styles.footer}>
+        <AuthenticatedTemplate>
         <button
           className="btn btn-outline-secondary"
           type="button"
           onClick={() => msalInstance.logoutRedirect()}
         >
-          Afmelden
+          Log Out
         </button>
+        </AuthenticatedTemplate>
       </footer>
     </div>
   )

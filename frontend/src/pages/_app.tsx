@@ -19,7 +19,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       require("bootstrap/dist/js/bootstrap")
     }
   }, [])
-  //console.info(idToken, ' token')
+
   useEffect(() => {
     if (msalInstance.getActiveAccount()) {
       acquireAccessToken().then((token) => setIdToken(token))
@@ -37,8 +37,6 @@ function MyApp({ Component, pageProps }: AppProps) {
     }
   }, [])
 
-  //console.info(idToken)
-
   return (
     <MsalProvider instance={msalInstance}>
       <Layout>
@@ -54,7 +52,7 @@ function MyApp({ Component, pageProps }: AppProps) {
             className="btn btn-primary"
             onClick={() => msalInstance.loginRedirect(loginParameters)}
           >
-            Inloggen
+            Log In
           </button>
         </UnauthenticatedTemplate>
       </Layout>
