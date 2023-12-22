@@ -33,7 +33,6 @@ const createApolloClient = (authToken: string) => {
     )
 
     const cache = createInMemoryCache()
-    //(<any>window).cache = cache
 
     return new ApolloClient({
       link: splitLink,
