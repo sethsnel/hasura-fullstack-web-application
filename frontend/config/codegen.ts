@@ -6,7 +6,7 @@ const config: CodegenConfig = {
       "https://movie-database.hasura.app/v1/graphql": {
         "headers": {
           "x-hasura-role": "admin",
-          "x-hasura-admin-secret": "JkPavqiS1BDDMTSvgO6LN874Yi9DVGtmn1Kt6o4pmoYgCs9H27Ys42mV4qmG5LZY"
+          "x-hasura-admin-secret": "<admin-secret>"
         }
         // headers: {
         //   Authorization: 'Bearer ' + process.env.AUTH_TOKEN,
