@@ -2,7 +2,7 @@ import { useState } from "react"
 import { AiFillStar, AiOutlineStar } from "react-icons/ai"
 
 import {
-  MovieRatingsQuery,
+  MovieRatingsSubscription,
 } from "../core/generated/graphql"
 
 import styles from "../styles/Movie.module.css"
@@ -10,7 +10,7 @@ import styles from "../styles/Movie.module.css"
 type MovieRatingsProps = {
   userId: string | undefined
   isLoadingRatings: boolean
-  data: MovieRatingsQuery | undefined
+  data: MovieRatingsSubscription | undefined
   updateRating: (rating: number) => Promise<void>
 }
 

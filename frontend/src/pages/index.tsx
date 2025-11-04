@@ -13,7 +13,7 @@ const Home: NextPage = () => {
   return (
     <>
       <h1 className={styles.title}>FMDB</h1>
-      <p>Fullstack movie database</p>
+      <p>Freshminds movie database</p>
       <div className="container-md">
         <input
           className="form-control mb-3 mt-3"

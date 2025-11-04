@@ -3,7 +3,7 @@ import Link from "next/link"
 import { AiFillStar } from "react-icons/ai"
 
 type MovieTileProps = {
-  movie: { Id: string; PosterUrl: string; AverageRating?: number }
+  movie: { Id: number; PosterUrl: string; AverageRating?: number }
 }
 
 const MovieTile = ({ movie }: MovieTileProps) => {

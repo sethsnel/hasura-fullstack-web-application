@@ -31,7 +31,8 @@ const MovieList = ({ titleFilter }: MovieListProps) => {
       <MovieTile
         key={movie.Id}
         movie={{
-          ...movie,
+          Id: movie.Id,
+          PosterUrl: movie.PosterUrl,
           AverageRating: movie.Ratings_aggregate.aggregate?.avg?.Rating || undefined,
         }}
       />
