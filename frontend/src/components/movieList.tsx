@@ -7,7 +7,7 @@ type MovieListProps = { titleFilter?: string }
 
 const MovieList = ({ titleFilter }: MovieListProps) => {
   const [titleFilterState, setTitleFilterState] = useState(titleFilter)
-  const { loading, data, refetch } = useListMoviesQuery({
+  const { loading, data, refetch, fetchMore } = useListMoviesQuery({
     variables: { titleFilter: `%${titleFilter ? titleFilter : ""}%` },
   })
 
@@ -16,6 +16,14 @@ const MovieList = ({ titleFilter }: MovieListProps) => {
       <span className="visually-hidden">Loading...</span>
     </div>
   )
+
+  const fetchMoreMovies = async () => {
+    fetchMore({
+      variables: {
+        offset: data?.Movies.length,
+      },
+    })
+  }
 
   if (titleFilter !== titleFilterState) {
     if (titleFilter) {
@@ -42,6 +50,9 @@ const MovieList = ({ titleFilter }: MovieListProps) => {
   return (
     <div>
       <div className="row row-cols-1 row-cols-md-4 g-4">{movies}</div>
+      <button className="btn btn-primary mt-3 mx-auto d-block" onClick={fetchMoreMovies}>
+        Meer laden
+      </button>
     </div>
   )
 }

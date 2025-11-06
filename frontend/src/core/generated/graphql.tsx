@@ -1265,6 +1265,7 @@ export type Uuid_Comparison_Exp = {
 
 export type ListMoviesQueryVariables = Exact<{
   limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
   titleFilter?: InputMaybe<Scalars['String']>;
 }>;
 
@@ -1320,8 +1321,8 @@ export type RatingMutation = { __typename?: 'mutation_root', insert_Ratings?: { 
 
 
 export const ListMoviesDocument = gql`
-    query ListMovies($limit: Int = 20, $titleFilter: String = "%%") {
-  Movies(limit: $limit, where: {Title: {_ilike: $titleFilter}}) {
+    query ListMovies($limit: Int = 20, $offset: Int = 0, $titleFilter: String = "%%") {
+  Movies(limit: $limit, offset: $offset, where: {Title: {_ilike: $titleFilter}}) {
     Title
     Id
     PosterUrl
@@ -1350,6 +1351,7 @@ export const ListMoviesDocument = gql`
  * const { data, loading, error } = useListMoviesQuery({
  *   variables: {
  *      limit: // value for 'limit'
+ *      offset: // value for 'offset'
  *      titleFilter: // value for 'titleFilter'
  *   },
  * });

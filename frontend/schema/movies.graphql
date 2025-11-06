@@ -1,5 +1,9 @@
-query ListMovies($limit: Int = 20, $titleFilter: String = "%%") {
-  Movies(limit: $limit, where: {Title: {_ilike: $titleFilter}}) {
+query ListMovies($limit: Int = 20, $offset: Int = 0, $titleFilter: String = "%%") {
+  Movies(
+    limit: $limit,
+    offset: $offset,
+    where: {Title: {_ilike: $titleFilter}}
+  ) {
     Title
     Id
     PosterUrl
